@@ -48,27 +48,27 @@ export default function Home() {
   const [notes, setNotes] = useState('')
 
   const handleSchedule = async () => {
-    const { error } = await supabase
-      .from('appointments')
+    const { data, error } = await supabase
+      .from("appointments")
       .insert([
         {
-          customer_name: customerName,
-          phone,
-          service_date: selectedDate,
-          service_time: selectedTime,
-          car_model: carModel,
-          car_year: carYear,
-          car_color: carColor,
-          car_plate: carPlate,
-          plan: selectedPlan,
-          payment_method: paymentMethod,
-          notes,
-        },
+          nome,
+          telefone,
+          carro_modelo,
+          ano,
+          cor,
+          placa,
+          data_agendamento,
+          horario
+        }
       ])
 
+    console.log("DATA:", data)
+    console.log("ERROR:", error)
+
     if (error) {
-      alert('Erro ao agendar')
       console.error(error)
+      alert(error.message)
       return
     }
 
